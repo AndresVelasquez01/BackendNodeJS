@@ -40,6 +40,9 @@ const User = mongoose.model('User', userSchema);
 
 // Ruta de registro de usuario
 app.post('/register', async (req, res) => {
+
+  console.log("Llamada a: ", "app.post('/register', async (req, res) => {");
+
   const { username, password } = req.body;
 
   try {
@@ -64,6 +67,9 @@ app.post('/register', async (req, res) => {
 
 // Ruta de autenticación y emisión de JWT
 app.post('/login', async (req, res) => {
+
+  console.log("Llamada a: ", "app.post('/login', async (req, res) => {");
+
   const { username, password } = req.body;
 
   try {
@@ -91,6 +97,8 @@ app.post('/login', async (req, res) => {
 // Ruta protegida que requiere autenticación con JWT
 app.get('/perfil', (req, res) => {
   
+  console.log("Llamada a: ", "app.get('/perfil', (req, res) => {");
+
   let token = req.headers['authorization'];
   
  
@@ -141,6 +149,9 @@ const Pedido = mongoose.model('Pedido', PedidoSchema);
 
 // Crear un nuevo documento (CREATE)
 app.post('/items', async (req, res) => {
+
+  console.log("Llamada a: ", "app.post('/items', async (req, res) => {");
+
   try {
     const nuevoItem = new Item(req.body);
     const itemGuardado = await nuevoItem.save();
@@ -152,6 +163,9 @@ app.post('/items', async (req, res) => {
 
 // Ruta para obtener todos los documentos (READ - Todos los elementos)
 app.get('/items', async (req, res) => {
+
+  console.log("Llamada a: ", "app.get('/items', async (req, res) => {");
+
   try {
     const items = await Item.find();
     res.json(items);
@@ -162,6 +176,9 @@ app.get('/items', async (req, res) => {
 
 // Ruta para obtener un solo documento por id (READ - Un elemento)
 app.get('/items/:id', async (req, res) => {
+
+  console.log("Llamada a: ", "app.get('/items/:id', async (req, res) => {");
+
   try {
     const item = await Item.findById(req.params.id);
     if (!item) return res.status(404).json({ error: 'Item no encontrado' });
@@ -173,6 +190,9 @@ app.get('/items/:id', async (req, res) => {
 
 // Actualizar un documento (UPDATE)
 app.put('/items/:id', async (req, res) => {
+
+  console.log("Llamada a: ", "app.put('/items/:id', async (req, res) => {");
+
   try {
     const itemActualizado = await Item.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!itemActualizado) return res.status(404).json({ error: 'Item no encontrado' });
@@ -184,6 +204,9 @@ app.put('/items/:id', async (req, res) => {
 
 // Eliminar un documento (DELETE)
 app.delete('/items/:id', async (req, res) => {
+
+  console.log("Llamada a: ", "app.delete('/items/:id', async (req, res) => {");
+
   try {
     const itemEliminado = await Item.findByIdAndDelete(req.params.id);
     if (!itemEliminado) return res.status(404).json({ error: 'Item no encontrado' });
@@ -195,6 +218,9 @@ app.delete('/items/:id', async (req, res) => {
 
 // Endpoint para validar correo electrónico
 app.post('/validate-email', async (req, res) => {
+
+  console.log("Llamada a: ", "app.post('/validate-email', async (req, res) => {");
+
   try {
     const { email, id } = req.body; // Obtenemos el correo y el ID desde el cuerpo de la solicitud
 
@@ -224,6 +250,9 @@ app.post('/validate-email', async (req, res) => {
 
 // Endpoint para Guardar Múltiples Ítems, ejemplo de formularios dinámicos
 app.post('/pedidos/batch', async (req, res) => {
+
+  console.log("Llamada a: ", "app.post('/pedidos/batch', async (req, res) => {");
+
   try {
     const nuevosPedidos = req.body; // Array de pedidos que llega del frontend
     const pedidosInsertados = await Pedido.insertMany(nuevosPedidos); // Inserta todos los pedidos
@@ -235,6 +264,9 @@ app.post('/pedidos/batch', async (req, res) => {
 });
 
 app.get('/form-fields', (req, res) => {
+
+  console.log("Llamada a: ", "app.get('/form-fields', (req, res) => {");
+
   const fields = [
     { id: 1, name: 'firstName', label: 'Nombre', required: true },
     { id: 2, name: 'lastName', label: 'Apellido', required: true },
